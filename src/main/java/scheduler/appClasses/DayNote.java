@@ -1,17 +1,15 @@
 package scheduler.appClasses;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import scheduler.time.WeekDay;
 
 public class DayNote extends VBox {
-    private WeekDay weekDay;
+    private final WeekDay weekDay;
     public DayNote(WeekDay day){
         super();
         weekDay = day;
@@ -26,7 +24,7 @@ public class DayNote extends VBox {
 
     private void addWeekDayHeader(){
         Label header = new Label();
-        header.setText(WeekDay.MONDAY.getString());
+        header.setText(weekDay.getString());
         header.setTextFill(Color.RED);
         this.getChildren().add(header);
     }
