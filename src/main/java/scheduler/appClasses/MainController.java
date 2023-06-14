@@ -38,5 +38,11 @@ public class MainController implements Initializable {
 
     private void generateDays(){
         notePane.getChildren().add(new DayNote(WeekDay.MONDAY));
+        notePane.getChildren().add(new DayNote(WeekDay.TUESDAY));
+        notePane.getChildren().add(new DayNote(WeekDay.WEDNESDAY));
+        notePane.getChildren().add(new DayNote(WeekDay.THURSDAY));
+        notePane.getChildren().add(new DayNote(WeekDay.FRIDAY));
+        notePane.getChildren().add(new DayNote(WeekDay.SATURDAY));
+        notePane.getChildren().add(new DayNote(WeekDay.SUNDAY));
     }
 }

@@ -13,5 +13,9 @@
 
 .oval-box{
     -fx-background-color: rgba(0, 0, 0, 0.6);
-    -fx-background-radius: 5px;
+    -fx-background-radius: 20px;
+}
+
+.notePane{
+    -fx-padding: 10 10 10 10;
 }

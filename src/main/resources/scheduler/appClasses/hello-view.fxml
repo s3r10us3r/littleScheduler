@@ -32,8 +32,7 @@
     </top>
 
     <center>
-      <HBox fx:id = "notePane" styleClass="notePane">
-        <Label text="CIPA DUPA" />
+      <HBox fx:id = "notePane" styleClass="notePane" spacing="20">
       </HBox>
     </center>
   </BorderPane>
