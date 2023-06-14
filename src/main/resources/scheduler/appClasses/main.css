@@ -1,0 +1,17 @@
+.topBar{
+    -fx-background-color: rgba(0, 0, 0, 0.7);
+    -fx-pref-height: 50;
+    -fx-padding: 10 10 10 10;
+}
+
+.time{
+    -fx-alignment: center;
+    -fx-font-size: 20px;
+    -fx-font-family: "Verdana";
+    -fx-opacity: 0.7;
+}
+
+.oval-box{
+    -fx-background-color: rgba(0, 0, 0, 0.6);
+    -fx-background-radius: 5px;
+}
