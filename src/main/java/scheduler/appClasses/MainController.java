@@ -17,9 +17,6 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
     @FXML
     private Label time;
-    @FXML
-    private HBox notePane;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         time.setText(CurrentTime.getCurrentTime());
@@ -28,21 +25,10 @@ public class MainController implements Initializable {
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-
-        generateDays();
     }
 
     private void updateTime(){
         time.setText(CurrentTime.getCurrentTime());
     }
 
-    private void generateDays(){
-        notePane.getChildren().add(new DayNote(WeekDay.MONDAY));
-        notePane.getChildren().add(new DayNote(WeekDay.TUESDAY));
-        notePane.getChildren().add(new DayNote(WeekDay.WEDNESDAY));
-        notePane.getChildren().add(new DayNote(WeekDay.THURSDAY));
-        notePane.getChildren().add(new DayNote(WeekDay.FRIDAY));
-        notePane.getChildren().add(new DayNote(WeekDay.SATURDAY));
-        notePane.getChildren().add(new DayNote(WeekDay.SUNDAY));
-    }
 }

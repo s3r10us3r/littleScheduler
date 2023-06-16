@@ -30,7 +30,7 @@ public class DayNote extends VBox {
         Label header = new Label();
         header.setText(weekDay.getString());
         header.setTextFill(Color.WHITE);
-        Font font  = new Font("Georgia", 35);
+        Font font  = new Font("", 35);
         header.setFont(font);
         this.getChildren().add(header);
         this.setOpacity(0.8);
