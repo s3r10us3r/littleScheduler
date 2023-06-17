@@ -1,22 +1,28 @@
 package scheduler.organize;
 
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.ArrayList;
 
 public class Day implements Comparable<Day>{
-    SortedSet<Event> events;
-    int number; //in month
-    DayOfTheWeek dayOfTheWeek;
+    private ArrayList<Timeline> timelines;
+    private int number; //in month
+    private DayOfTheWeek dayOfTheWeek;
     public Day(int number, DayOfTheWeek dayOfTheWeek){
         this.number = number;
-        events = new TreeSet<>();
+        timelines = new ArrayList<Timeline>();
         this.dayOfTheWeek = dayOfTheWeek;
     }
     public void addEvent(Event event){
-        events.add(event);
+        for(Timeline timeline : timelines){
+            if(timeline.addEvent(event)){
+                return;
+            }
+        }
+        Timeline timeline = new Timeline();
+        timeline.addEvent(event);
+        timelines.add(timeline);
     }
-    public SortedSet<Event> getEvents() {
-        return events;
+    public ArrayList<Timeline> getTimelines() {
+        return timelines;
     }
 
     @Override

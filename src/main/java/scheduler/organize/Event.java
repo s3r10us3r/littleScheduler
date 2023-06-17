@@ -1,11 +1,14 @@
 package scheduler.organize;
 
 public class Event implements Comparable<Event>{
+    public static final double opacityValue = 0.7;
     private int startTime; //in minutes from 00:00
     private int finishTime; //in minutes from 00:00
     private int duration;
     private String name;
     private String description;
+    private double[] backgroundColorValues;
+    private double[] textColorValues;
 
     public Event(String name, int startTime, int finishTime) throws IllegalArgumentException{
         this.name = name;
@@ -16,18 +19,54 @@ public class Event implements Comparable<Event>{
             throw new IllegalArgumentException("Finish time smaller than start time");
         }
         duration = finishTime - startTime;
+        backgroundColorValues = new double[3]; backgroundColorValues[0] = 255; backgroundColorValues[1] = 255; backgroundColorValues[2] = 255;
+        textColorValues = new double[3]; textColorValues[0] = 0; textColorValues[1] = 0; textColorValues[2] = 0;
     }
+
+    public boolean isInConflict(Event event){
+        if(startTime >= event.getFinishTime() || finishTime <= event.getStartTime()){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
 
     @Override
     public int compareTo(Event o){
         return startTime - o.getStartTime();
     }
 
+    public double[] getBackgroundColorValues() {
+        return backgroundColorValues;
+    }
+
+    public double[] getTextColorValues() {
+        return textColorValues;
+    }
+
+    public void setBackgroundColorValues(double[] backgroundColorValues) {
+        this.backgroundColorValues = backgroundColorValues;
+    }
+
+    public void setTextColorValues(double[] textColorValues) {
+        this.textColorValues = textColorValues;
+    }
+
     public int getStartTime() {
         return startTime;
     }
 
+    public int getFinishTime() {
+        return finishTime;
+    }
+
     private void setDescription(String description){
         this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

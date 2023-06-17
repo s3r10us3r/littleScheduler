@@ -5,9 +5,9 @@ public class Year {
     private int number;
     public final boolean isLeapYear;
 
-    public Year(int number){
+    protected Year(int number){
         this.number = number;
-        months = new Month[12];
+        months = new Month[13];
         if(number % 4 == 0){
             isLeapYear = true;
         }
@@ -20,12 +20,15 @@ public class Year {
         return number;
     }
 
-    public void addMonth(Month month){
-        if(months[month.getNumber()] != null){
-            throw new IllegalArgumentException("This month has already been initialized");
+    public void createMonth(int number){
+        Month month = new Month(number, isLeapYear);
+        months[month.getNumber()] = month;
+    }
+
+    public Month getMonth(int number){
+        if(number < 1 || number > 12){
+            throw new IllegalArgumentException("Invalid month number");
         }
-        else{
-            months[month.getNumber()] = month;
-        }
+        return months[number];
     }
 }

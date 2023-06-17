@@ -3,7 +3,7 @@ package scheduler.organize;
 public class Month implements Comparable<Month>{
     private Day[] days;
     private MonthInfo monthInfo;
-    public Month(int number, boolean isLeapYear){
+    protected Month(int number, boolean isLeapYear){
         this.monthInfo = MonthInfo.getMonth(number);
         if(isLeapYear && monthInfo == MonthInfo.FEBRUARY) {
             days = new Day[monthInfo.numberOfDays+1];
@@ -43,5 +43,9 @@ public class Month implements Comparable<Month>{
         else{
             return true;
         }
+    }
+
+    public Day[] getDays() {
+        return days;
     }
 }
