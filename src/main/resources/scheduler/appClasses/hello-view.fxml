@@ -30,9 +30,9 @@
     </top>
 
     <center>
-      <GridPane>
+      <VBox fx:id="testView">
 
-      </GridPane>
+      </VBox>
     </center>
   </BorderPane>
 </StackPane>
