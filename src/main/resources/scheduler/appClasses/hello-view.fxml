@@ -30,7 +30,7 @@
     </top>
 
     <center>
-      <VBox fx:id="testView">
+      <VBox fx:id="testView" styleClass="dayTable">
 
       </VBox>
     </center>

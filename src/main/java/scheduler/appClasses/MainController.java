@@ -28,8 +28,8 @@ public class MainController implements Initializable {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
-        Event event = new Event("Test Label", 1, 2);
-        Label testLabel = new EventLabel(event, 200, 200);
+        Event event = new Event("Test Label", 0, 100);
+        Label testLabel = new EventLabel(event, 200);
         testView.getChildren().add(testLabel);
     }
 

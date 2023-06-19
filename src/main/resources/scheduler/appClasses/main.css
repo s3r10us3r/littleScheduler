@@ -19,3 +19,13 @@
 .notePane{
     -fx-padding: 10 10 10 10;
 }
+
+.dayTable{
+    -fx-border-color: black;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+    -fx-min-height: 700px;
+    -fx-max-height: 700px;
+    -fx-max-width: 250px;
+    -fx-min-width: 250px;
+}

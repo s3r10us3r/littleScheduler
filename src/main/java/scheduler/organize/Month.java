@@ -45,7 +45,8 @@ public class Month implements Comparable<Month>{
         }
     }
 
-    public Day[] getDays() {
-        return days;
+    public Day getDay(int number)
+    {
+        return days[number];
     }
 }
