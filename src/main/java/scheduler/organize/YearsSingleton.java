@@ -10,6 +10,7 @@ public class YearsSingleton {
             throw new IllegalArgumentException("This year has already been initialized");
         }
         years[year.getNumber() - 2000] = year;
+        System.out.println("Year added");
     }
 
     public static Year getYear(int number){

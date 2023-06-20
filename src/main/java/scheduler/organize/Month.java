@@ -23,6 +23,7 @@ public class Month implements Comparable<Month>{
             throw new IllegalArgumentException("This day was already initialized!");
         }
         days[day.getNumber()] = day;
+        System.out.println("Added day!");
     }
 
     public int getNumber() {

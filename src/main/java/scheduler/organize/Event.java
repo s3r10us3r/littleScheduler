@@ -10,7 +10,7 @@ public class Event implements Comparable<Event>{
     private double[] backgroundColorValues;
     private double[] textColorValues;
 
-    public Event(String name, int startTime, int finishTime) throws IllegalArgumentException{
+    public Event(String name, int startTime, int finishTime, double red, double green, double blue) throws IllegalArgumentException{
         this.name = name;
         this.startTime = startTime;
         this.finishTime = finishTime;
@@ -19,7 +19,7 @@ public class Event implements Comparable<Event>{
             throw new IllegalArgumentException("Finish time smaller than start time");
         }
         duration = finishTime - startTime;
-        backgroundColorValues = new double[3]; backgroundColorValues[0] = 0.5; backgroundColorValues[1] = 1; backgroundColorValues[2] = 0;
+        backgroundColorValues = new double[3]; backgroundColorValues[0] = red; backgroundColorValues[1] = green; backgroundColorValues[2] = blue;
         textColorValues = new double[3]; textColorValues[0] = 1; textColorValues[1] = 1; textColorValues[2] = 1;
     }
 

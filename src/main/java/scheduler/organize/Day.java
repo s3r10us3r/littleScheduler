@@ -19,6 +19,7 @@ public class Day implements Comparable<Day>{
         }
         else{
             events.add(event);
+            System.out.println("Added event");
             return true;
         }
     }
@@ -26,10 +27,10 @@ public class Day implements Comparable<Day>{
     private boolean eventCollidesWithOtherEvents(Event event){
         for(Event e : events){
             if(event.getStartTime() < e.getFinishTime() && event.getStartTime() >= e.getStartTime()){
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override

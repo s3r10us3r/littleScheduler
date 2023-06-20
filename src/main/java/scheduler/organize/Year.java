@@ -5,7 +5,7 @@ public class Year {
     private int number;
     public final boolean isLeapYear;
 
-    protected Year(int number){
+    public Year(int number){
         this.number = number;
         months = new Month[13];
         if(number % 4 == 0){
@@ -23,6 +23,7 @@ public class Year {
     public void createMonth(int number){
         Month month = new Month(number, isLeapYear);
         months[month.getNumber()] = month;
+        System.out.println("Added month");
     }
 
     public Month getMonth(int number){
