@@ -16,23 +16,29 @@ public class EventLabel extends Label {
     public EventLabel(Event event, int width){
         super();
         this.event = event;
-        this.height = new SimpleDoubleProperty(((double)event.getFinishTime() - (double)event.getStartTime()) * 2);
+        this.height = new SimpleDoubleProperty(event.getDuration() * 2);
         this.width = new SimpleDoubleProperty(width);
-        this.maxHeightProperty().bind(this.height);
-        this.minHeightProperty().bind(this.height);
-        this.minWidthProperty().bind(this.width);
-        this.maxWidthProperty().bind(this.width);
         this.setAlignment(Pos.CENTER);
         this.setFont(new Font( "Helvetica Bold", 10));
+        this.setText(event.getName());
+        Color textColor = new Color(event.getTextColorValues()[0], event.getTextColorValues()[1], event.getTextColorValues()[2], 1.0);
+        this.setTextFill(textColor);
         generateLabel();
     }
 
     private void generateLabel(){
-        this.setText(event.getName());
-        Color backgroundColor = new Color(event.getBackgroundColorValues()[0], event.getBackgroundColorValues()[1], event.getBackgroundColorValues()[2], Event.opacityValue);
-        Color textColor = new Color(event.getTextColorValues()[0], event.getTextColorValues()[1], event.getTextColorValues()[2], 1.0);
-        this.setBackground(new Background(new BackgroundFill(backgroundColor, new CornerRadii(0, 7, 7, 0, false), null)));
-        System.out.println(this.getStyle());
-        this.setTextFill(textColor);
+        if(event.getDuration() >= 5) {
+            this.maxHeightProperty().bind(this.height);
+            this.minHeightProperty().bind(this.height);
+            this.minWidthProperty().bind(this.width);
+            this.maxWidthProperty().bind(this.width);
+            Color backgroundColor = new Color(event.getBackgroundColorValues()[0], event.getBackgroundColorValues()[1], event.getBackgroundColorValues()[2], Event.opacityValue);
+            this.setBackground(new Background(new BackgroundFill(backgroundColor, new CornerRadii(0, 7, 7, 0, false), null)));
+            System.out.println(this.getStyle());
+        }
+        //generate bullet label
+        else{
+            System.out.println("\u2022");
+        }
     }
 }
