@@ -7,11 +7,13 @@ import java.util.TreeSet;
 public class Day implements Comparable<Day>{
     private SortedSet<Event> events;
     private int number; //in month
+    private Month month;
     private DayOfTheWeek dayOfTheWeek;
-    public Day(int number, DayOfTheWeek dayOfTheWeek){
+    public Day(int number, Month month, DayOfTheWeek dayOfTheWeek){
         this.number = number;
         events = new TreeSet<>();
         this.dayOfTheWeek = dayOfTheWeek;
+        this.month = month;
     }
     public boolean addEvent(Event event){
         if(eventCollidesWithOtherEvents(event)){
@@ -44,5 +46,13 @@ public class Day implements Comparable<Day>{
 
     public SortedSet<Event> getEvents() {
         return events;
+    }
+
+    public Month getMonth(){
+        return month;
+    }
+
+    public DayOfTheWeek getDayOfTheWeek() {
+        return dayOfTheWeek;
     }
 }

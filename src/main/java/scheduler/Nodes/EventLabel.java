@@ -26,19 +26,15 @@ public class EventLabel extends Label {
         generateLabel();
     }
 
+
+    //TODO: MAKE BULLET LABEL GENERATION
     private void generateLabel(){
-        if(event.getDuration() >= 5) {
-            this.maxHeightProperty().bind(this.height);
-            this.minHeightProperty().bind(this.height);
-            this.minWidthProperty().bind(this.width);
-            this.maxWidthProperty().bind(this.width);
-            Color backgroundColor = new Color(event.getBackgroundColorValues()[0], event.getBackgroundColorValues()[1], event.getBackgroundColorValues()[2], Event.opacityValue);
-            this.setBackground(new Background(new BackgroundFill(backgroundColor, new CornerRadii(0, 7, 7, 0, false), null)));
-            System.out.println(this.getStyle());
-        }
-        //generate bullet label
-        else{
-            System.out.println("\u2022");
-        }
+        this.maxHeightProperty().bind(this.height);
+        this.minHeightProperty().bind(this.height);
+        this.minWidthProperty().bind(this.width);
+        this.maxWidthProperty().bind(this.width);
+        Color backgroundColor = new Color(event.getBackgroundColorValues()[0], event.getBackgroundColorValues()[1], event.getBackgroundColorValues()[2], Event.opacityValue);
+        this.setBackground(new Background(new BackgroundFill(backgroundColor, new CornerRadii(0, 7, 7, 0, false), null)));
+        System.out.println(this.getStyle());
     }
 }
