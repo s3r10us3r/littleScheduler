@@ -6,15 +6,73 @@ import java.util.TreeSet;
 
 public class Day implements Comparable<Day>{
     private SortedSet<Event> events;
-    private int number; //in month
-    private Month month;
+    private int number; //from 31st December 1999
     private DayOfTheWeek dayOfTheWeek;
-    public Day(int number, Month month, DayOfTheWeek dayOfTheWeek){
+    public Day(int number){
         this.number = number;
         events = new TreeSet<>();
-        this.dayOfTheWeek = dayOfTheWeek;
-        this.month = month;
+        this.dayOfTheWeek = DayOfTheWeek.computeDayOfTheWeek(number);
     }
+
+    public Day(int day, int month, int year){
+        this.number = computeNumber(day, month, year);
+        events = new TreeSet<>();
+        this.dayOfTheWeek = DayOfTheWeek.computeDayOfTheWeek(number);
+    }
+
+    public static int computeNumber(int day, int month, int year){
+        int yearFrom2000 = year - 2000;
+        int number = 0;
+        if(year != 2000){
+            number += 365 * yearFrom2000;
+            number += yearFrom2000/4 + 1;
+        }
+        number += getDaysPassedThisYear(month, year);
+        number += day;
+        return number;
+    }
+
+    private static int getDaysPassedThisYear(int month, int year){
+        int result = 0;
+        if(month > 1){
+            result += 31;
+        }
+        if(month > 2){
+            result += 28;
+            if(year % 4 == 0){
+                result += 1;
+            }
+        }
+        if(month > 3){
+            result += 31;
+        }
+        if(month > 4){
+            result += 30;
+        }
+        if(month > 5){
+            result += 31;
+        }
+        if(month > 6){
+            result += 30;
+        }
+        if(month > 7){
+            result += 31;
+        }
+        if(month > 8){
+            result += 31;
+        }
+        if(month > 9){
+            result += 30;
+        }
+        if(month > 10){
+            result += 31;
+        }
+        if(month > 11){
+            result += 30;
+        }
+        return result;
+    }
+
     public boolean addEvent(Event event){
         if(eventCollidesWithOtherEvents(event)){
             return false;
@@ -46,10 +104,6 @@ public class Day implements Comparable<Day>{
 
     public SortedSet<Event> getEvents() {
         return events;
-    }
-
-    public Month getMonth(){
-        return month;
     }
 
     public DayOfTheWeek getDayOfTheWeek() {

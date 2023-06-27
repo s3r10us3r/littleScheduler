@@ -13,4 +13,34 @@ public enum DayOfTheWeek {
         this.shortForm = shortForm;
         this.number = number;
     }
+
+    public static DayOfTheWeek computeDayOfTheWeek(int number){
+        int res = (number + 4)%7;//We are counting from January 1st 2000 which was Saturday
+        switch (res) {
+            case 0 -> {
+                return MONDAY;
+            }
+            case 1 -> {
+                return TUESDAY;
+            }
+            case 2 -> {
+                return WEDNESDAY;
+            }
+            case 3 -> {
+                return THURSDAY;
+            }
+            case 4 -> {
+                return FRIDAY;
+            }
+            case 5 -> {
+                return SATURDAY;
+            }
+            case 6 -> {
+                return SUNDAY;
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
 }

@@ -4,13 +4,11 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.BoundingBox;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import scheduler.Nodes.DayPane;
+import scheduler.Nodes.WeekHBox;
 import scheduler.organize.*;
 import scheduler.time.CurrentTime;
 
@@ -31,20 +29,23 @@ public class MainController implements Initializable {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
-        Year year2003 = new Year(2003);
-        year2003.createMonth(4);
-        Day fourthOfApril = new Day(6, DayOfTheWeek.SUNDAY);
+        Day sixthOfApril = new Day(6, 4, 2003);
         Event birth = new Event("I was born", 360, 370, 1.0, 0.5, 0);
         Event death = new Event("I died", 400, 430, 0.5, 1.0, 0.2);
-        fourthOfApril.addEvent(birth);
-        fourthOfApril.addEvent(death);
-        year2003.getMonth(4).addDay(fourthOfApril);
-        YearsSingleton.addInitializedYear(year2003);
-        DayPane dayStackPane = new DayPane(2003, 4, 6);
+        sixthOfApril.addEvent(birth);
+        sixthOfApril.addEvent(death);
+
+        Day fifthOfApril = new Day(5, 4, 2003);
+        Event dinner = new Event("Dinner with Grandma", 360, 400, 0, 0,0);
+        fifthOfApril.addEvent(dinner);
+
+        DaysHashMap.addDay(sixthOfApril);
+        DaysHashMap.addDay(fifthOfApril);
+        WeekHBox week = new WeekHBox(fifthOfApril.getNumber());
         ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setContent(dayStackPane);
-        scrollPane.setMinSize(220, 700);
-        scrollPane.setMaxSize(220, 700);
+        scrollPane.setContent(week);
+        scrollPane.setMinSize(1000, 700);
+        scrollPane.setMaxSize(1000, 700);
         testView.getChildren().add(scrollPane);
     }
 
