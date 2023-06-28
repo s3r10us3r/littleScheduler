@@ -7,7 +7,7 @@ import scheduler.organize.DaysHashMap;
 import scheduler.organize.Event;
 
 public class DayPane extends Pane {
-    private int number;
+    private final int number;
     public DayPane(int year, int month, int day){
         this.number = Day.computeNumber(day, month, year);
         this.setMinSize(200,2880);
@@ -17,10 +17,10 @@ public class DayPane extends Pane {
 
     public DayPane(int number){
         this.number = number;
-        this.setMinSize(204,2880);
-        this.setMaxSize(204, 2880);
+        this.setMinSize(250,2880);
+        this.setMaxSize(250, 2880);
         generateDayVbox();
-        this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, new BorderWidths(2))));
+        this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, new BorderWidths(1, 1, 1, 1))));
     }
 
     private void generateDayVbox(){

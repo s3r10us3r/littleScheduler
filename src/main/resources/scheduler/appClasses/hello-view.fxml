@@ -8,8 +8,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.HBox?>
 
+<?import javafx.scene.control.ScrollPane?>
 <StackPane stylesheets="@main.css" xmlns:fx="http//javafx.com/fxml" fx:controller="scheduler.appClasses.MainController">
-  <BorderPane>
+  <BorderPane fx:id="borderPane">
     <top>
       <HBox styleClass="topBar">
         <VBox alignment="CENTER">
@@ -17,7 +18,7 @@
         </VBox>
 
         <VBox alignment="BASELINE_RIGHT" HBox.hgrow="ALWAYS">
-          <ImageView fx:id="menuIcon" styleClass="menuIcon" fitHeight="30" fitWidth="30">
+          <ImageView    fitHeight="30" fitWidth="30">
             <Image url = "@white-menu-icon-png-18.jpg"/>
           </ImageView>
         </VBox>
@@ -26,9 +27,13 @@
     </top>
 
     <left>
-      <VBox fx:id="testView" styleClass="dayTable">
-
-      </VBox>
+      <ScrollPane fx:id="timeScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="NEVER">
+        <VBox fx:id="timeTable" minWidth="50" maxWidth="50"/>
+      </ScrollPane>
     </left>
+
+    <center>
+      <ScrollPane fx:id="mainScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="NEVER" pannable="true"/>
+    </center>
   </BorderPane>
 </StackPane>
