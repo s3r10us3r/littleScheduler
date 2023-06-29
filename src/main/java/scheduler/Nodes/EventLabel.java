@@ -35,6 +35,5 @@ public class EventLabel extends Label {
         this.maxWidthProperty().bind(this.width);
         Color backgroundColor = new Color(event.getBackgroundColorValues()[0], event.getBackgroundColorValues()[1], event.getBackgroundColorValues()[2], Event.opacityValue);
         this.setBackground(new Background(new BackgroundFill(backgroundColor, new CornerRadii(0, 7, 7, 0, false), null)));
-        System.out.println(this.getStyle());
     }
 }

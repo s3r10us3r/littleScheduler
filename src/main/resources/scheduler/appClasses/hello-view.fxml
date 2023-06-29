@@ -28,12 +28,14 @@
 
     <left>
       <ScrollPane fx:id="timeScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="NEVER">
-        <VBox fx:id="timeTable" minWidth="50" maxWidth="50"/>
+        <VBox fx:id="timeTable" minWidth="50" maxWidth="50" minHeight="2880" maxHeight="2880"/>
       </ScrollPane>
     </left>
 
     <center>
-      <ScrollPane fx:id="mainScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="NEVER" pannable="true"/>
+      <ScrollPane fx:id="mainScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="NEVER" pannable="true">
+        <StackPane fx:id = "mainStackPane"/>
+      </ScrollPane>
     </center>
   </BorderPane>
 </StackPane>

@@ -1,6 +1,10 @@
 package scheduler.Nodes;
 
+import javafx.scene.Group;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import scheduler.organize.DayOfTheWeek;
 
 public class WeekHBox extends HBox {
@@ -11,8 +15,8 @@ public class WeekHBox extends HBox {
     }
 
     private void generateDayPanes(){
-        for(int i = firstDayNumber; i < firstDayNumber + 9; i++){
-            getChildren().add(new DayPane(i));
+        for(int i = firstDayNumber; i < firstDayNumber + 7; i++){
+            this.getChildren().add(new DayPane(i));
         }
     }
 

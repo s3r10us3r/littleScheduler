@@ -2,16 +2,12 @@ package scheduler.appClasses;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import scheduler.Nodes.WeekHBox;
@@ -55,14 +51,11 @@ public class MainController implements Initializable {
 
 
         Day monday  = new Day(31, 3, 2003);
-        Event ithink = new Event("I think i am falling in love", 360, 420, 0.98, 0.27, 0.66);
-        monday.addEvent(ithink);
         DaysHashMap.addDay(monday);
         DaysHashMap.addDay(sixthOfApril);
         DaysHashMap.addDay(fifthOfApril);
         WeekHBox week = new WeekHBox(fifthOfApril.getNumber());
         mainScrollPane.setContent(week);
-
         prepareTimeTable();
     }
 
@@ -71,13 +64,17 @@ public class MainController implements Initializable {
     }
 
     private void prepareTimeTable(){
+        Background background = new Background(new BackgroundFill(Color.WHITE, null, null));
+
+        timeTable.setBackground(background);
         for(int i = 1; i < 24; i ++){
             Label label = new Label(i + ":" + "00");
-            label.setBackground(new Background(new BackgroundFill(Color.GRAY, null, null)));
             label.setMinWidth(50);
             label.setMaxWidth(50);
             label.setMinHeight(120);
             label.setMaxHeight(120);
+            label.setTranslateY(60);
+            System.out.println(label.getHeight());
             timeTable.getChildren().add(label);
         }
 
