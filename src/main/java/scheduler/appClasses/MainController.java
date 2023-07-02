@@ -10,12 +10,13 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import scheduler.Nodes.WeekHBox;
+import scheduler.Nodes.WeekPane;
 import scheduler.organize.*;
 import scheduler.time.CurrentTime;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Stack;
 
 
 //TODO: MAKE TIME TABLE ON THE LEFT BETTER
@@ -25,11 +26,10 @@ public class MainController implements Initializable {
     @FXML
     private Label time;
     @FXML
-    private ScrollPane mainScrollPane;
-    @FXML
     private VBox timeTable;
     @FXML
     private ScrollPane timeScrollPane;
+    private WeekPane weekPane;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         time.setText(CurrentTime.getCurrentTime());
@@ -38,6 +38,7 @@ public class MainController implements Initializable {
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+
 
         Day sixthOfApril = new Day(6, 4, 2003);
         Event birth = new Event("I was born", 360, 370, 1.0, 0.5, 0);
@@ -54,8 +55,8 @@ public class MainController implements Initializable {
         DaysHashMap.addDay(monday);
         DaysHashMap.addDay(sixthOfApril);
         DaysHashMap.addDay(fifthOfApril);
-        WeekHBox week = new WeekHBox(fifthOfApril.getNumber());
-        mainScrollPane.setContent(week);
+        weekPane = new WeekPane(fifthOfApril.getNumber());
+        borderPane.setCenter(weekPane);
         prepareTimeTable();
     }
 
@@ -77,8 +78,7 @@ public class MainController implements Initializable {
             System.out.println(label.getHeight());
             timeTable.getChildren().add(label);
         }
-
-        timeScrollPane.vvalueProperty().bind(mainScrollPane.vvalueProperty());
+        timeScrollPane.vvalueProperty().bind(weekPane.getMainScrollPane().vvalueProperty());
         timeScrollPane.addEventFilter(ScrollEvent.ANY, ScrollEvent::consume);
     }
 }

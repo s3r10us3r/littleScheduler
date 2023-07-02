@@ -25,8 +25,8 @@ public class DayPane extends StackPane {
     private void setUp(){
         this.setMinSize(250,2880);
         this.setMaxSize(250, 2880);
-        generateDayVbox();
         generateLines();
+        generateDayVbox();
         this.setBorder(dayPaneBorder);
     }
 
@@ -51,5 +51,9 @@ public class DayPane extends StackPane {
             lines.getChildren().add(line);
         }
         this.getChildren().add(lines);
+    }
+
+    public int getNumber(){
+        return number;
     }
 }

@@ -12,30 +12,28 @@
 <StackPane stylesheets="@main.css" xmlns:fx="http//javafx.com/fxml" fx:controller="scheduler.appClasses.MainController">
   <BorderPane fx:id="borderPane">
     <top>
-      <HBox styleClass="topBar">
-        <VBox alignment="CENTER">
-          <Label fx:id="time" styleClass="time"  textFill="white" alignment="CENTER"/>
-        </VBox>
+      <VBox>
+        <HBox styleClass="topBar">
+          <VBox alignment="CENTER">
+            <Label fx:id="time" styleClass="time"  textFill="white" alignment="CENTER"/>
+          </VBox>
 
-        <VBox alignment="BASELINE_RIGHT" HBox.hgrow="ALWAYS">
-          <ImageView    fitHeight="30" fitWidth="30">
-            <Image url = "@white-menu-icon-png-18.jpg"/>
-          </ImageView>
-        </VBox>
+          <VBox alignment="BASELINE_RIGHT" HBox.hgrow="ALWAYS">
+            <ImageView    fitHeight="30" fitWidth="30">
+              <Image url = "@white-menu-icon-png-18.jpg"/>
+            </ImageView>
+          </VBox>
 
-      </HBox>
+        </HBox>
+      </VBox>
     </top>
 
     <left>
+      <Label minHeight="210" maxHeight="210" minWidth="50" maxWidth="50"/>
       <ScrollPane fx:id="timeScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="NEVER">
         <VBox fx:id="timeTable" minWidth="50" maxWidth="50" minHeight="2880" maxHeight="2880"/>
       </ScrollPane>
     </left>
 
-    <center>
-      <ScrollPane fx:id="mainScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="NEVER" pannable="true">
-        <StackPane fx:id = "mainStackPane"/>
-      </ScrollPane>
-    </center>
   </BorderPane>
 </StackPane>
