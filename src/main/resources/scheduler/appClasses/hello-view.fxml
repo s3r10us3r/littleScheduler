@@ -12,7 +12,7 @@
 <StackPane stylesheets="@main.css" xmlns:fx="http//javafx.com/fxml" fx:controller="scheduler.appClasses.MainController">
   <BorderPane fx:id="borderPane">
     <top>
-      <VBox>
+      <VBox fx:id="topVBox">
         <HBox styleClass="topBar">
           <VBox alignment="CENTER">
             <Label fx:id="time" styleClass="time"  textFill="white" alignment="CENTER"/>

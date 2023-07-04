@@ -14,7 +14,6 @@ public class WeekPane extends VBox {
     private final int firstDayNumber;
     private ScrollPane mainScrollPane;
     private HBox eventHBox;
-    private HBox weekBar;
     public WeekPane(int dayNumber){
         eventHBox = new HBox();
         firstDayNumber = dayNumber - DayOfTheWeek.computeDayOfTheWeek(dayNumber).number + 1;
@@ -40,18 +39,18 @@ public class WeekPane extends VBox {
         System.out.println("MAIN SCROLL PANE: " + this.mainScrollPane.getWidth());
     }
 
-    private void generateWeekBar(){
-        weekBar = new HBox();
+    public ScrollPane generateWeekBar(){
+        HBox weekBar = new HBox();
         ScrollPane weekBarScrollPane = new ScrollPane();
         int width = 250 * 7;
         int height = 150;
-        Background background = new Background(new BackgroundFill(Color.RED, null, null));
+        Background background = new Background(new BackgroundFill(Color.WHITE, null, null));
         weekBar.setBackground(background);
         weekBar.setMinSize(width, height);
         weekBar.setMaxSize(width, height);
         this.setAlignment(Pos.TOP_CENTER);
         for(int i = 0; i < 7; i++){
-            weekBar.getChildren().add(generateWeekdayLabel(DaysHashMap.getDay(firstDayNumber)));
+            weekBar.getChildren().add(generateWeekdayVBox(DaysHashMap.getDay(firstDayNumber + i)));
         }
 
         weekBarScrollPane.setPannable(false);
@@ -62,14 +61,18 @@ public class WeekPane extends VBox {
         weekBarScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         weekBarScrollPane.hvalueProperty().bind(mainScrollPane.hvalueProperty());
         weekBarScrollPane.addEventFilter(ScrollEvent.ANY, ScrollEvent::consume);
-        weekBarScrollPane.setMinHeight(150);
-        weekBarScrollPane.setMaxHeight(150);
-        this.getChildren().add(weekBarScrollPane);
+        weekBarScrollPane.setMinHeight(100);
+        weekBarScrollPane.setMaxHeight(100);
+        return weekBarScrollPane;
     }
 
-    private Label generateWeekdayLabel(Day day){
-        Label weekDayLabel = new Label(day.getDayOfTheWeek().longForm);
-        return weekDayLabel;
+    private VBox generateWeekdayVBox(Day day){
+        VBox weekDayVBox = new VBox();
+        weekDayVBox.setMinSize(250, 100);
+        weekDayVBox.setMaxSize(250, 100);
+        weekDayVBox.setAlignment(Pos.CENTER);
+
+        Label numberInMonth = new Label();
     }
 
     public ScrollPane getMainScrollPane() {

@@ -16,10 +16,6 @@ import scheduler.time.CurrentTime;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Stack;
-
-
-//TODO: MAKE TIME TABLE ON THE LEFT BETTER
 public class MainController implements Initializable {
     @FXML
     private BorderPane borderPane;
@@ -29,6 +25,10 @@ public class MainController implements Initializable {
     private VBox timeTable;
     @FXML
     private ScrollPane timeScrollPane;
+    @FXML
+    private ScrollPane weekBarScrollPane;
+    @FXML
+    private VBox topVBox;
     private WeekPane weekPane;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -58,6 +58,7 @@ public class MainController implements Initializable {
         weekPane = new WeekPane(fifthOfApril.getNumber());
         borderPane.setCenter(weekPane);
         prepareTimeTable();
+        topVBox.getChildren().add(weekPane.generateWeekBar());
     }
 
     private void updateTime(){
@@ -81,4 +82,5 @@ public class MainController implements Initializable {
         timeScrollPane.vvalueProperty().bind(weekPane.getMainScrollPane().vvalueProperty());
         timeScrollPane.addEventFilter(ScrollEvent.ANY, ScrollEvent::consume);
     }
+
 }
