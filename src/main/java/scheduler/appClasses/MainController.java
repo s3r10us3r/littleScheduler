@@ -10,7 +10,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import scheduler.Nodes.WeekPane;
+import scheduler.Nodes.WeekPane.WeekPane;
 import scheduler.organize.*;
 import scheduler.time.CurrentTime;
 
@@ -76,7 +76,6 @@ public class MainController implements Initializable {
             label.setMinHeight(120);
             label.setMaxHeight(120);
             label.setTranslateY(60);
-            System.out.println(label.getHeight());
             timeTable.getChildren().add(label);
         }
         timeScrollPane.vvalueProperty().bind(weekPane.getMainScrollPane().vvalueProperty());

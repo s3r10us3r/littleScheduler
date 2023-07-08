@@ -1,4 +1,4 @@
-package scheduler.Nodes;
+package scheduler.Nodes.WeekPane;
 
 import javafx.scene.Group;
 import javafx.scene.layout.*;

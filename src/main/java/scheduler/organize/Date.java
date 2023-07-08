@@ -1,9 +1,9 @@
 package scheduler.organize;
 
 public class Date {
-    public final int year;
-    public final int month;
-    public final int day;
+    public int year;
+    public int month;
+    public int day;
 
     public Date(int year, int month, int day){
         this.year = year;
@@ -12,7 +12,14 @@ public class Date {
     }
 
     public Date(Day day){
-        int number = day.getNumber();
+        setTheNums(day.getNumber());
+    }
+
+    public Date(int number){
+        setTheNums(number);
+    }
+
+    private void setTheNums(int number){
         int year = 2000;
         int month = 1;
         int dayNumber = 1;

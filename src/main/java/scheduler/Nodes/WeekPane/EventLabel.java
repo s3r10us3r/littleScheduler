@@ -1,4 +1,4 @@
-package scheduler.Nodes;
+package scheduler.Nodes.WeekPane;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Pos;
