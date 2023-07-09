@@ -15,7 +15,7 @@ public enum DayOfTheWeek {
     }
 
     public static DayOfTheWeek computeDayOfTheWeek(int number){
-        int res = (number + 4)%7;//We are counting from January 1st 2000 which was Saturday
+        int res = (number + 5)%7;//We are counting from January 1st 2000 which was Saturday
         switch (res) {
             case 0 -> {
                 return MONDAY;

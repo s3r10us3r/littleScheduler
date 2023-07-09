@@ -28,7 +28,7 @@ public class Day implements Comparable<Day>{
             number += yearFrom2000/4 + 1;
         }
         number += getDaysPassedThisYear(month, year);
-        number += day;
+        number += day - 1;//this is because first of January 2000 has number '0'
         return number;
     }
 

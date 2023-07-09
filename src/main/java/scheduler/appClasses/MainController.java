@@ -41,6 +41,7 @@ public class MainController implements Initializable {
 
 
         Day sixthOfApril = new Day(6, 4, 2003);
+        System.out.println("Number " + sixthOfApril.getNumber());
         Event birth = new Event("I was born", 360, 370, 1.0, 0.5, 0);
         Event death = new Event("I died", 400, 430, 0.5, 1.0, 0.2);
         sixthOfApril.addEvent(birth);

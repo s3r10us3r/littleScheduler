@@ -29,7 +29,6 @@ public class WeekPane extends VBox {
         mainScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         mainScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         mainScrollPane.setPannable(true);
-        System.out.println("MAIN SCROLL PANE: " + this.mainScrollPane.getWidth());
     }
 
     public WeekBar generateWeekBar(){
