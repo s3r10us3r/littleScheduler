@@ -28,11 +28,5 @@
       </VBox>
     </top>
 
-    <left>
-      <ScrollPane fx:id="timeScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="NEVER">
-        <VBox fx:id="timeTable" minWidth="50" maxWidth="50"/>
-      </ScrollPane>
-    </left>
-
   </BorderPane>
 </StackPane>

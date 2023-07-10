@@ -1,6 +1,7 @@
 package scheduler.Nodes.WeekPane;
 
 import javafx.scene.Group;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -20,6 +21,9 @@ public class DayPane extends StackPane {
     public DayPane(int number){
         this.number = number;
         setUp();
+        this.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event)->{
+            System.out.println(number);
+        });
     }
 
     private void setUp(){
