@@ -12,6 +12,7 @@ public class WeekPane extends VBox {
         eventHBox = new HBox();
         firstDayNumber = dayNumber - DayOfTheWeek.computeDayOfTheWeek(dayNumber).number + 1;
         prepareMainScrollPane();
+        generateWeekBar();
         generateDayPanes();
     }
 
@@ -19,6 +20,8 @@ public class WeekPane extends VBox {
         for(int i = firstDayNumber; i < firstDayNumber + 7; i++){
             eventHBox.getChildren().add(new DayPane(i));
         }
+        eventHBox.setMinHeight(2880);
+        eventHBox.setMaxHeight(2880);
         mainScrollPane.setContent(eventHBox);
         this.getChildren().add(mainScrollPane);
     }
@@ -31,10 +34,10 @@ public class WeekPane extends VBox {
         mainScrollPane.setPannable(true);
     }
 
-    public WeekBar generateWeekBar(){
+    private void generateWeekBar(){
         WeekBar weekBar = new WeekBar(firstDayNumber);
-        weekBar.hvalueProperty().bind(mainScrollPane.hvalueProperty());
-        return weekBar;
+        weekBar.hvalueProperty().bindBidirectional(mainScrollPane.hvalueProperty());
+        this.getChildren().add(weekBar);
     }
 
     public ScrollPane getMainScrollPane() {

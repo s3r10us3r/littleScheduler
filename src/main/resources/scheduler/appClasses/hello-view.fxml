@@ -29,9 +29,8 @@
     </top>
 
     <left>
-      <Label minHeight="210" maxHeight="210" minWidth="50" maxWidth="50"/>
       <ScrollPane fx:id="timeScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="NEVER">
-        <VBox fx:id="timeTable" minWidth="50" maxWidth="50" minHeight="2880" maxHeight="2880"/>
+        <VBox fx:id="timeTable" minWidth="50" maxWidth="50"/>
       </ScrollPane>
     </left>
 

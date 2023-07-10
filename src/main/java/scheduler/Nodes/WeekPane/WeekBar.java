@@ -23,12 +23,6 @@ public class WeekBar extends ScrollPane {
         HBox weekBarHBox = new HBox();
         Background background = new Background(new BackgroundFill(Color.WHITE, null, null));
 
-        Label emptyLabel = new Label();
-        emptyLabel.setBackground(background);
-        emptyLabel.setMinWidth(50);
-        emptyLabel.setMaxWidth(50);
-        weekBarHBox.getChildren().add(emptyLabel);
-
         weekBarHBox.setBackground(background);
         weekBarHBox.setMinHeight(height);
         weekBarHBox.setMaxHeight(height);
@@ -45,7 +39,6 @@ public class WeekBar extends ScrollPane {
         setFitToWidth(true);
         setVbarPolicy(ScrollBarPolicy.NEVER);
         setHbarPolicy(ScrollBarPolicy.NEVER);
-        addEventFilter(ScrollEvent.ANY, ScrollEvent::consume);
         setMinHeight(100);
         setMaxHeight(100);
     }

@@ -59,28 +59,51 @@ public class MainController implements Initializable {
         weekPane = new WeekPane(fifthOfApril.getNumber());
         borderPane.setCenter(weekPane);
         prepareTimeTable();
-        topVBox.getChildren().add(weekPane.generateWeekBar());
     }
 
     private void updateTime(){
         time.setText(CurrentTime.getCurrentTime());
     }
 
-    private void prepareTimeTable(){
+    private void prepareTimeTable() {
         Background background = new Background(new BackgroundFill(Color.WHITE, null, null));
-
+        timeScrollPane.translateYProperty().set(100);
         timeTable.setBackground(background);
-        for(int i = 1; i < 24; i ++){
-            Label label = new Label(i + ":" + "00");
+        timeTable.setMinHeight(2880);
+        timeTable.setMaxHeight(2880);
+
+
+        Label emptyLabel1 = new Label();
+        emptyLabel1.setMinHeight(60);
+        emptyLabel1.setMaxHeight(60);
+        timeTable.getChildren().add(emptyLabel1);
+
+        for (int i = 1; i < 24; i++) {
+            Label label = new Label(String.format("%02d:00", i));
             label.setMinWidth(50);
             label.setMaxWidth(50);
             label.setMinHeight(120);
             label.setMaxHeight(120);
-            label.setTranslateY(60);
             timeTable.getChildren().add(label);
         }
-        timeScrollPane.vvalueProperty().bind(weekPane.getMainScrollPane().vvalueProperty());
-        timeScrollPane.addEventFilter(ScrollEvent.ANY, ScrollEvent::consume);
-    }
 
+
+        Label emptyLabel2 = new Label();
+        emptyLabel2.setMinHeight(60);
+        emptyLabel2.setMaxHeight(60);
+        timeTable.getChildren().add(emptyLabel2);
+
+        System.out.println("Heights: " + timeTable.getHeight() + " " + weekPane.getHeight());
+
+        timeScrollPane.vvalueProperty().bindBidirectional(weekPane.getMainScrollPane().vvalueProperty());
+        timeScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        timeScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        timeScrollPane.setContent(timeTable);
+        timeScrollPane.setFitToHeight(true);
+        timeScrollPane.setFitToWidth(true);
+        timeScrollPane.addEventFilter(ScrollEvent.ANY, (ScrollEvent event) -> {
+            System.out.println(timeScrollPane.getVvalue() + " " + weekPane.getMainScrollPane().getVvalue());
+            event.consume();
+        });
+    }
 }
