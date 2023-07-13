@@ -2,20 +2,18 @@ package scheduler.Nodes.WeekPane;
 
 import javafx.application.Platform;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
 import scheduler.organize.DayOfTheWeek;
 
-import java.util.SortedSet;
-
 public class WeekPane extends BorderPane {
     private final int firstDayNumber;
     private ScrollPane mainScrollPane;
     private HBox eventHBox;
-    private int currentForwardOffset = 0;
-    private int currentBackwardsOffset = 0;
+    private WeekBar weekBar;
+    private int forwardOffset = 0;
+    private int backwardsOffset = 0;
     private boolean finishedGeneration = true;
     public WeekPane(int dayNumber){
         eventHBox = new HBox();
@@ -23,31 +21,21 @@ public class WeekPane extends BorderPane {
         prepareMainScrollPane();
         generateWeekBar();
         generateTimeTable();
-        generateDayPanesForward(0);
+        generateDayPanesForward();
         mainScrollPane.setContent(eventHBox);
         this.setCenter(mainScrollPane);
         System.out.println("FirstDayNumber: " + firstDayNumber);
 
         mainScrollPane.addEventHandler(ScrollEvent.ANY, (ScrollEvent event)->{
             if(mainScrollPane.hvalueProperty().getValue() == 1){
-                currentForwardOffset += 7;
-                generateDayPanesForward(currentForwardOffset);
+                weekBar.generateWeekForward();
+                generateDayPanesForward();
                 System.out.println("Generated forward");
+                System.out.println(mainScrollPane.getHvalue());
             }
             if(mainScrollPane.hvalueProperty().getValue() == 0 && finishedGeneration){
-                currentBackwardsOffset += 7;
-                double prevWidth = eventHBox.getWidth();
-                generateDayPanesBackwards(currentBackwardsOffset);
-                finishedGeneration = false;
-
-                Platform.runLater(()->{
-                    double newWidth = eventHBox.getWidth();
-                    double newHValue = (newWidth - prevWidth)/newWidth;
-                    mainScrollPane.setHvalue(newHValue);
-                    System.out.println("New hvalue " + newHValue);
-                    finishedGeneration = true;
-                });
-
+                weekBar.generateWeekBackwards();
+                generateDayPanesBackwards();
                 System.out.println("Generated backwards");
             }
         });
@@ -55,20 +43,39 @@ public class WeekPane extends BorderPane {
         mainScrollPane.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) ->{
             System.out.println(mainScrollPane.hvalueProperty().getValue());
             System.out.println(eventHBox.getWidth());
+            System.out.println(mainScrollPane.getWidth() + " " + mainScrollPane.getViewportBounds());
         });
     }
 
-    private void generateDayPanesForward(int offset){
-        for(int i = firstDayNumber + offset; i < firstDayNumber + 7 + offset; i++){
+    private void generateDayPanesForward(){
+        for(int i = firstDayNumber + forwardOffset; i < firstDayNumber + 7 + forwardOffset; i++){
             eventHBox.getChildren().add(new DayPane(i));
         }
+
+        forwardOffset += 7;
     }
 
-    private void generateDayPanesBackwards(int offset){
-        for(int i = firstDayNumber - offset - 1; i > firstDayNumber - 7 - offset; i--){
+    private void generateDayPanesBackwards(){
+        double prevWidth = eventHBox.getWidth();
+
+        for(int i = firstDayNumber - backwardsOffset - 1; i > firstDayNumber - 8 - backwardsOffset; i--){
             eventHBox.getChildren().add(0,new DayPane(i));
         }
+
+        backwardsOffset += 7;
+        finishedGeneration = false;
+
+
+        Platform.runLater(() -> {
+            double newWidth = eventHBox.getWidth();
+            double newHValue = (newWidth - prevWidth) / (newWidth - mainScrollPane.getWidth());
+            System.out.println("New hvalue: " + newHValue);
+
+            mainScrollPane.setHvalue(newHValue);
+            finishedGeneration = true;
+        });
     }
+
     private void prepareMainScrollPane(){
         mainScrollPane = new ScrollPane();
         mainScrollPane.setFitToWidth(true);
@@ -79,7 +86,7 @@ public class WeekPane extends BorderPane {
     }
 
     private void generateWeekBar(){
-        WeekBar weekBar = new WeekBar(firstDayNumber);
+        weekBar = new WeekBar(firstDayNumber);
         weekBar.hvalueProperty().bindBidirectional(mainScrollPane.hvalueProperty());
         HBox hbox = new HBox();
         Pane emptyPane = new Pane();
@@ -101,6 +108,6 @@ public class WeekPane extends BorderPane {
     }
 
     public void refresh(){
-        generateDayPanesForward(0);
+        generateDayPanesForward();
     }
 }
