@@ -6,11 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import scheduler.Nodes.WeekPane.TimeTable;
 import scheduler.Nodes.WeekPane.WeekPane;
 import scheduler.organize.*;
 import scheduler.time.CurrentTime;
@@ -26,6 +23,8 @@ public class MainController implements Initializable {
     private ScrollPane weekBarScrollPane;
     @FXML
     private VBox topVBox;
+    @FXML
+    private Label monthAndYearLabel;
     private WeekPane weekPane;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -55,6 +54,7 @@ public class MainController implements Initializable {
         DaysHashMap.addDay(sixthOfApril);
         DaysHashMap.addDay(fifthOfApril);
         weekPane = new WeekPane(fifthOfApril.getNumber());
+        weekPane.setUpMonthAndDayLabel(monthAndYearLabel);
         HBox mainHBox = new HBox();
         mainHBox.getChildren().add(weekPane);
         borderPane.setCenter(mainHBox);

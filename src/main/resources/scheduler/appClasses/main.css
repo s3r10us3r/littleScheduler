@@ -29,3 +29,9 @@
     -fx-max-width: 250px;
     -fx-min-width: 250px;
 }
+
+.monthAndYearLabel{
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-family: "Verdana";
+}

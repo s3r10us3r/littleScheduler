@@ -1,79 +1,31 @@
 package scheduler.Nodes.WeekPane;
 
-import javafx.application.Platform;
+import javafx.geometry.Bounds;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
+import javafx.scene.control.Label;
+import scheduler.organize.Date;
 import scheduler.organize.DayOfTheWeek;
+
+import java.util.ArrayList;
 
 public class WeekPane extends BorderPane {
     private final int firstDayNumber;
     private ScrollPane mainScrollPane;
     private HBox eventHBox;
     private WeekBar weekBar;
-    private int forwardOffset = 0;
-    private int backwardsOffset = 0;
-    private boolean finishedGeneration = true;
+    private final int WIDTH = 100;
     public WeekPane(int dayNumber){
         eventHBox = new HBox();
         firstDayNumber = dayNumber - DayOfTheWeek.computeDayOfTheWeek(dayNumber).number + 1;
         prepareMainScrollPane();
+        generateDayPanes();
         generateWeekBar();
         generateTimeTable();
-        generateDayPanesForward();
         mainScrollPane.setContent(eventHBox);
         this.setCenter(mainScrollPane);
+        this.center();
         System.out.println("FirstDayNumber: " + firstDayNumber);
-
-        mainScrollPane.addEventHandler(ScrollEvent.ANY, (ScrollEvent event)->{
-            if(mainScrollPane.hvalueProperty().getValue() == 1){
-                weekBar.generateWeekForward();
-                generateDayPanesForward();
-                System.out.println("Generated forward");
-                System.out.println(mainScrollPane.getHvalue());
-            }
-            if(mainScrollPane.hvalueProperty().getValue() == 0 && finishedGeneration){
-                weekBar.generateWeekBackwards();
-                generateDayPanesBackwards();
-                System.out.println("Generated backwards");
-            }
-        });
-
-        mainScrollPane.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) ->{
-            System.out.println(mainScrollPane.hvalueProperty().getValue());
-            System.out.println(eventHBox.getWidth());
-            System.out.println(mainScrollPane.getWidth() + " " + mainScrollPane.getViewportBounds());
-        });
-    }
-
-    private void generateDayPanesForward(){
-        for(int i = firstDayNumber + forwardOffset; i < firstDayNumber + 7 + forwardOffset; i++){
-            eventHBox.getChildren().add(new DayPane(i));
-        }
-
-        forwardOffset += 7;
-    }
-
-    private void generateDayPanesBackwards(){
-        double prevWidth = eventHBox.getWidth();
-
-        for(int i = firstDayNumber - backwardsOffset - 1; i > firstDayNumber - 8 - backwardsOffset; i--){
-            eventHBox.getChildren().add(0,new DayPane(i));
-        }
-
-        backwardsOffset += 7;
-        finishedGeneration = false;
-
-
-        Platform.runLater(() -> {
-            double newWidth = eventHBox.getWidth();
-            double newHValue = (newWidth - prevWidth) / (newWidth - mainScrollPane.getWidth());
-            System.out.println("New hvalue: " + newHValue);
-
-            mainScrollPane.setHvalue(newHValue);
-            finishedGeneration = true;
-        });
     }
 
     private void prepareMainScrollPane(){
@@ -86,8 +38,8 @@ public class WeekPane extends BorderPane {
     }
 
     private void generateWeekBar(){
-        weekBar = new WeekBar(firstDayNumber);
-        weekBar.hvalueProperty().bindBidirectional(mainScrollPane.hvalueProperty());
+        weekBar = new WeekBar(firstDayNumber, WIDTH);
+        weekBar.hvalueProperty().bind(mainScrollPane.hvalueProperty());
         HBox hbox = new HBox();
         Pane emptyPane = new Pane();
         emptyPane.setMinWidth(52);
@@ -102,12 +54,40 @@ public class WeekPane extends BorderPane {
         this.setLeft(timeTable);
     }
 
+    private void generateDayPanes(){
+        for(int i = Math.max(firstDayNumber - WIDTH, 0); i < firstDayNumber + WIDTH + 7; i++){
+            eventHBox.getChildren().add(new DayPane(i));
+        }
+    }
+
+    private void center(){
+        mainScrollPane.setHvalue(0.5);
+    }
+
+    public void setUpMonthAndDayLabel(Label label){
+        Date todaysDate = new Date(firstDayNumber);
+        label.setText(todaysDate.getMonthName() + ", " + todaysDate.year);
+
+        mainScrollPane.hvalueProperty().addListener((observable, oldValue, newValue) ->{
+            ArrayList <Integer> dayNumbers = new ArrayList<>();
+            for(int i = 0; i < eventHBox.getChildren().size(); i++){
+                DayPane dayPane = (DayPane) eventHBox.getChildren().get(i);
+                Bounds nodeBounds = dayPane.localToScene(dayPane.getBoundsInLocal(), true);
+                if( mainScrollPane.getBoundsInLocal().intersects(nodeBounds)){
+                    dayNumbers.add(dayPane.getNumber());
+                }
+            }
+
+            for(int number : dayNumbers){
+                Date date = new Date(number);
+                if(date.getMonthNumberOfDays() - date.day == 4 || date.day == 3){
+                    label.setText(date.getMonthName() + ", " + date.year);
+                }
+            }
+        });
+    }
 
     public ScrollPane getMainScrollPane() {
         return mainScrollPane;
-    }
-
-    public void refresh(){
-        generateDayPanesForward();
     }
 }
