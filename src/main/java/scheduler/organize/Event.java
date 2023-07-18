@@ -26,6 +26,22 @@ public class Event implements Comparable<Event>{
         textColorValues = new double[3]; textColorValues[0] = 1; textColorValues[1] = 1; textColorValues[2] = 1;
     }
 
+    public void reset(String name, int startTime, int finishTime, double red, double green, double blue) throws IllegalArgumentException{
+        this.name = name;
+        this.startTime = startTime;
+        this.finishTime = finishTime;
+        this.description = null;
+        if(finishTime < startTime){
+            throw new IllegalArgumentException("Finish time smaller than start time");
+        }
+        duration = finishTime - startTime;
+        if(duration < 5){
+            duration = 0;
+        }
+        backgroundColorValues = new double[3]; backgroundColorValues[0] = red; backgroundColorValues[1] = green; backgroundColorValues[2] = blue;
+        textColorValues = new double[3]; textColorValues[0] = 1; textColorValues[1] = 1; textColorValues[2] = 1;
+    }
+
     public boolean isInConflict(Event event){
         if(startTime >= event.getFinishTime() || finishTime <= event.getStartTime()){
             return false;
@@ -34,7 +50,6 @@ public class Event implements Comparable<Event>{
             return true;
         }
     }
-
 
     @Override
     public int compareTo(Event o){
@@ -47,14 +62,6 @@ public class Event implements Comparable<Event>{
 
     public double[] getTextColorValues() {
         return textColorValues;
-    }
-
-    public void setBackgroundColorValues(double[] backgroundColorValues) {
-        this.backgroundColorValues = backgroundColorValues;
-    }
-
-    public void setTextColorValues(double[] textColorValues) {
-        this.textColorValues = textColorValues;
     }
 
     public int getStartTime() {

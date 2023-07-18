@@ -2,10 +2,14 @@ package scheduler.Nodes.WeekPane;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Pos;
+import javafx.geometry.Side;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import scheduler.appClasses.HelloApplication;
 import scheduler.organize.Event;
 
 public class EventLabel extends Label {
@@ -13,13 +17,13 @@ public class EventLabel extends Label {
     private SimpleDoubleProperty height;
     private SimpleDoubleProperty width;
 
-    public EventLabel(Event event, int width){
+    public EventLabel(Event event){
         super();
         this.event = event;
         this.height = new SimpleDoubleProperty(event.getDuration() * 2);
-        this.width = new SimpleDoubleProperty(width);
+        this.width = new SimpleDoubleProperty(200);
         this.setAlignment(Pos.CENTER);
-        this.setFont(new Font( "Helvetica Bold", 10));
+        this.setFont(new Font( "Helvetica Bold", 15));
         this.setText(event.getName());
         Color textColor = new Color(event.getTextColorValues()[0], event.getTextColorValues()[1], event.getTextColorValues()[2], 1.0);
         this.setTextFill(textColor);
@@ -36,4 +40,37 @@ public class EventLabel extends Label {
         Color backgroundColor = new Color(event.getBackgroundColorValues()[0], event.getBackgroundColorValues()[1], event.getBackgroundColorValues()[2], Event.opacityValue);
         this.setBackground(new Background(new BackgroundFill(backgroundColor, new CornerRadii(0, 7, 7, 0, false), null)));
     }
+
+    public void refresh(){
+        height.set(event.getDuration() * 2);
+        setText(event.getName());
+        Color backgroundColor = new Color(event.getBackgroundColorValues()[0], event.getBackgroundColorValues()[1], event.getBackgroundColorValues()[2], Event.opacityValue);
+        this.setBackground(new Background(new BackgroundFill(backgroundColor, new CornerRadii(0, 7, 7, 0, false), null)));
+    }
+
+    public Event getEvent(){
+        return event;
+    }
+
+    private void generateContextMenu(){
+        ContextMenu contextMenu = new ContextMenu();
+
+        MenuItem editEventItem = new MenuItem("Edit event");
+        editEventItem.setOnAction(event -> {
+            EventCreator eventCreator = new EventCreator(this);
+            eventCreator.show(HelloApplication.stage);
+        });
+
+        contextMenu.getItems().add(editEventItem);
+
+        MenuItem deleteEventItem = new MenuItem("Delete event");
+        deleteEventItem.setOnAction(event -> {
+
+        });
+
+        setOnMouseClicked(event -> {
+            contextMenu.show(this, Side.RIGHT, 0, 0);
+        });
+    }
+
 }

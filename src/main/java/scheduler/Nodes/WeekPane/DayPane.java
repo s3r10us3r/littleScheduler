@@ -5,12 +5,13 @@ import javafx.event.EventHandler;
 import javafx.geometry.Side;
 import javafx.scene.Group;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.stage.Stage;
+import scheduler.appClasses.HelloApplication;
 import scheduler.organize.Date;
 import scheduler.organize.Day;
 import scheduler.organize.DaysHashMap;
@@ -54,8 +55,8 @@ public class DayPane extends StackPane {
         this.getChildren().add(eventPane);
     }
 
-    private void addEventLabel(Event event){
-        EventLabel eventLabel = new EventLabel(event, 200);
+    public void addEventLabel(Event event){
+        EventLabel eventLabel = new EventLabel(event);
         eventLabel.setLayoutY(2 * event.getStartTime());
         eventPane.getChildren().add(eventLabel);
     }
@@ -90,16 +91,15 @@ public class DayPane extends StackPane {
         return menuItem;
     }
 
-    private void addNewEvent(){
+    public void addNewEvent(){
         Day day = DaysHashMap.getDay(number);
         if(day == null){
             day = new Day(number);
             DaysHashMap.addDay(day);
         }
-        Event sample = new Event("Sample", 100, 500, (double)224/255, (double)9/255, (double)181/255);
-        day.addEvent(sample);
-
-        addEventLabel(sample);
+        EventCreator eventCreator = new EventCreator(this);
+        eventCreator.show(HelloApplication.stage);
+        System.out.println("It should have been shown");
     }
 
     public int getNumber(){
