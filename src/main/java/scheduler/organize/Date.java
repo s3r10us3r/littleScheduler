@@ -73,6 +73,59 @@ public class Date {
         return getMonthNumberOfDays(this.month, this.year);
     }
 
+    public int computeNumber(){
+        int yearFrom2000 = year - 2000;
+        int number = 0;
+        if(year != 2000){
+            number += 365 * yearFrom2000;
+            number += yearFrom2000/4 + 1;
+        }
+        number += getDaysPassedThisYear();
+        number += day - 1;//this is because first of January 2000 has number '0'
+        return number;
+    }
+
+    private int getDaysPassedThisYear(){
+        int result = 0;
+        if(month > 1){
+            result += 31;
+        }
+        if(month > 2){
+            result += 28;
+            if(year % 4 == 0){
+                result += 1;
+            }
+        }
+        if(month > 3){
+            result += 31;
+        }
+        if(month > 4){
+            result += 30;
+        }
+        if(month > 5){
+            result += 31;
+        }
+        if(month > 6){
+            result += 30;
+        }
+        if(month > 7){
+            result += 31;
+        }
+        if(month > 8){
+            result += 31;
+        }
+        if(month > 9){
+            result += 30;
+        }
+        if(month > 10){
+            result += 31;
+        }
+        if(month > 11){
+            result += 30;
+        }
+        return result;
+    }
+
     public String getMonthName(int num){
         switch(num){
             case 1:

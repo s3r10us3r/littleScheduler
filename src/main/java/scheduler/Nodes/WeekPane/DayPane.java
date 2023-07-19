@@ -10,8 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.stage.Stage;
-import scheduler.appClasses.HelloApplication;
+import scheduler.appClasses.SchedulerApp;
 import scheduler.organize.Date;
 import scheduler.organize.Day;
 import scheduler.organize.DaysHashMap;
@@ -56,9 +55,13 @@ public class DayPane extends StackPane {
     }
 
     public void addEventLabel(Event event){
-        EventLabel eventLabel = new EventLabel(event);
+        EventLabel eventLabel = new EventLabel(event, this);
         eventLabel.setLayoutY(2 * event.getStartTime());
         eventPane.getChildren().add(eventLabel);
+    }
+
+    public void deleteEventLabel(EventLabel eventLabel){
+        eventPane.getChildren().remove(eventLabel);
     }
 
     public void generateLines(){
@@ -75,9 +78,7 @@ public class DayPane extends StackPane {
         ContextMenu contextMenu = new ContextMenu();
         contextMenu.getItems().add(addEventToThisDayMenuItem());
 
-        setOnMouseClicked(event -> {
-            contextMenu.show(this, Side.RIGHT, 0, 0);
-        });
+        setOnContextMenuRequested(event -> contextMenu.show(this, Side.RIGHT, 0, 0));
     }
 
     private MenuItem addEventToThisDayMenuItem(){
@@ -98,8 +99,7 @@ public class DayPane extends StackPane {
             DaysHashMap.addDay(day);
         }
         EventCreator eventCreator = new EventCreator(this);
-        eventCreator.show(HelloApplication.stage);
-        System.out.println("It should have been shown");
+        eventCreator.show(SchedulerApp.stage);
     }
 
     public int getNumber(){

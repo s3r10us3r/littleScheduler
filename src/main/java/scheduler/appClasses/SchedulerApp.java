@@ -7,12 +7,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class SchedulerApp extends Application {
     public static Scene scene;
     public static Stage stage;
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SchedulerApp.class.getResource("WeekPane.fxml"));
         scene = new Scene(fxmlLoader.load(), 1920, 1080);
         this.stage = stage;
         stage.setTitle("Scheduler");

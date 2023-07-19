@@ -5,7 +5,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import scheduler.organize.Date;
-import scheduler.organize.Day;
 import scheduler.organize.DayOfTheWeek;
 
 public class WeekDayBox extends VBox {

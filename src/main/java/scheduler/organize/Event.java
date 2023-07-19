@@ -6,7 +6,6 @@ public class Event implements Comparable<Event>{
     private int finishTime; //in minutes from 00:00
     private int duration;
     private String name;
-    private String description;
     private double[] backgroundColorValues;
     private double[] textColorValues;
 
@@ -14,7 +13,6 @@ public class Event implements Comparable<Event>{
         this.name = name;
         this.startTime = startTime;
         this.finishTime = finishTime;
-        this.description = null;
         if(finishTime < startTime){
             throw new IllegalArgumentException("Finish time smaller than start time");
         }
@@ -30,7 +28,6 @@ public class Event implements Comparable<Event>{
         this.name = name;
         this.startTime = startTime;
         this.finishTime = finishTime;
-        this.description = null;
         if(finishTime < startTime){
             throw new IllegalArgumentException("Finish time smaller than start time");
         }
@@ -43,12 +40,7 @@ public class Event implements Comparable<Event>{
     }
 
     public boolean isInConflict(Event event){
-        if(startTime >= event.getFinishTime() || finishTime <= event.getStartTime()){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return startTime < event.getFinishTime() && finishTime > event.getStartTime();
     }
 
     @Override
@@ -71,19 +63,9 @@ public class Event implements Comparable<Event>{
     public int getFinishTime() {
         return finishTime;
     }
-
-    private void setDescription(String description){
-        this.description = description;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }

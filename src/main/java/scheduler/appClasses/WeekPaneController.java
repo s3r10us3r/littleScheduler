@@ -13,8 +13,9 @@ import scheduler.organize.*;
 import scheduler.time.CurrentTime;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
-public class MainController implements Initializable {
+public class WeekPaneController implements Initializable {
     @FXML
     private BorderPane borderPane;
     @FXML
@@ -35,25 +36,10 @@ public class MainController implements Initializable {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
+        LocalDate today = LocalDate.now();
+        Date date = new Date(today.getYear(), today.getMonthValue(), today.getDayOfMonth());
 
-        Day sixthOfApril = new Day(6, 4, 2003);
-        Day lastDayofMarch = new Day(31, 3, 2003);
-        lastDayofMarch.addEvent(new Event("Stuff", 0, 600, 1.0, 0.5 , 0));
-        System.out.println("Last day of march number " + lastDayofMarch.getNumber());
-        System.out.println("Number " + sixthOfApril.getNumber());
-        Event birth = new Event("I was born", 360, 370, 1.0, 0.5, 0);
-        Event death = new Event("I died", 400, 430, 0.5, 1.0, 0.2);
-        sixthOfApril.addEvent(birth);
-        sixthOfApril.addEvent(death);
-
-        Day fifthOfApril = new Day(5, 4, 2003);
-        Event dinner = new Event("Dinner with Grandma", 0, 1200, 0, 0,0);
-        fifthOfApril.addEvent(dinner);
-
-        DaysHashMap.addDay(lastDayofMarch);
-        DaysHashMap.addDay(sixthOfApril);
-        DaysHashMap.addDay(fifthOfApril);
-        weekPane = new WeekPane(fifthOfApril.getNumber());
+        weekPane = new WeekPane(date.computeNumber());
         weekPane.setUpMonthAndDayLabel(monthAndYearLabel);
         HBox mainHBox = new HBox();
         mainHBox.getChildren().add(weekPane);

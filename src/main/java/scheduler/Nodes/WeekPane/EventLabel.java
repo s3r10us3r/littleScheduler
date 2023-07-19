@@ -9,16 +9,19 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import scheduler.appClasses.HelloApplication;
+import scheduler.appClasses.SchedulerApp;
+import scheduler.organize.DaysHashMap;
 import scheduler.organize.Event;
 
 public class EventLabel extends Label {
     private Event event;
+    private DayPane parent;
     private SimpleDoubleProperty height;
     private SimpleDoubleProperty width;
 
-    public EventLabel(Event event){
+    public EventLabel(Event event, DayPane parent){
         super();
+        this.parent = parent;
         this.event = event;
         this.height = new SimpleDoubleProperty(event.getDuration() * 2);
         this.width = new SimpleDoubleProperty(200);
@@ -28,6 +31,7 @@ public class EventLabel extends Label {
         Color textColor = new Color(event.getTextColorValues()[0], event.getTextColorValues()[1], event.getTextColorValues()[2], 1.0);
         this.setTextFill(textColor);
         generateLabel();
+        generateContextMenu();
     }
 
 
@@ -58,18 +62,22 @@ public class EventLabel extends Label {
         MenuItem editEventItem = new MenuItem("Edit event");
         editEventItem.setOnAction(event -> {
             EventCreator eventCreator = new EventCreator(this);
-            eventCreator.show(HelloApplication.stage);
+            eventCreator.show(SchedulerApp.stage);
         });
 
         contextMenu.getItems().add(editEventItem);
 
         MenuItem deleteEventItem = new MenuItem("Delete event");
         deleteEventItem.setOnAction(event -> {
-
+            int dayNumber = parent.getNumber();
+            DaysHashMap.getDay(dayNumber).deleteEvent(this.event);
+            parent.deleteEventLabel(this);
         });
+        contextMenu.getItems().add(deleteEventItem);
 
-        setOnMouseClicked(event -> {
-            contextMenu.show(this, Side.RIGHT, 0, 0);
+        this.setOnContextMenuRequested(event -> {
+            contextMenu.show(this, Side.RIGHT, 0, event.getY());
+            event.consume();
         });
     }
 

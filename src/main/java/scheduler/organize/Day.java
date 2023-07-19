@@ -1,6 +1,5 @@
 package scheduler.organize;
 
-import java.time.MonthDay;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -83,6 +82,10 @@ public class Day implements Comparable<Day>{
             System.out.println("Added event");
             return true;
         }
+    }
+
+    public void deleteEvent(Event event){
+        events.remove(event);
     }
 
     private boolean eventCollidesWithOtherEvents(Event event){
