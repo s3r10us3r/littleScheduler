@@ -1,21 +1,21 @@
 package scheduler.organize;
 
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class Day implements Comparable<Day>{
-    private SortedSet<Event> events;
-    private int number; //from 31st December 1999
-    private DayOfTheWeek dayOfTheWeek;
+public class Day implements Serializable {
+    protected ArrayList<Event> events;
+    protected int number; //from 31st December 1999
+    protected DayOfTheWeek dayOfTheWeek;
     public Day(int number){
         this.number = number;
-        events = new TreeSet<>();
+        events = new ArrayList<>();
         this.dayOfTheWeek = DayOfTheWeek.computeDayOfTheWeek(number);
     }
 
     public Day(int day, int month, int year){
         this.number = computeNumber(day, month, year);
-        events = new TreeSet<>();
+        events = new ArrayList<>();
         this.dayOfTheWeek = DayOfTheWeek.computeDayOfTheWeek(number);
     }
 
@@ -96,16 +96,11 @@ public class Day implements Comparable<Day>{
         return false;
     }
 
-    @Override
-    public int compareTo(Day o){
-        return number - o.getNumber();
-    }
-
     public int getNumber() {
         return number;
     }
 
-    public SortedSet<Event> getEvents() {
+    public ArrayList<Event> getEvents() {
         return events;
     }
 

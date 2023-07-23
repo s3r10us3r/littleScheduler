@@ -2,6 +2,8 @@ package scheduler.Nodes.WeekPane;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,14 +11,12 @@ import javafx.geometry.Side;
 import javafx.scene.Group;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
 import scheduler.appClasses.SchedulerApp;
 import scheduler.appClasses.WeekPaneController;
-import scheduler.organize.Date;
 import scheduler.organize.Day;
 import scheduler.organize.DaysHashMap;
 import scheduler.organize.Event;
@@ -40,12 +40,6 @@ public class DayPane extends StackPane {
     public DayPane(int number){
         this.number = number;
         setUp(number == WeekPaneController.TODAYSNUMBER);
-        this.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event)->{
-            System.out.println(number);
-            Date date = new Date(number);
-            System.out.println(date.month + " " + date.getMonthName());
-            System.out.println(String.format("My number: %d new number: %d",  this.number,number - WeekPaneController.weekPane.getFirstDayNumber() + WeekPane.WIDTH + 1));
-        });
     }
 
     private void setUp(boolean isToday){
@@ -127,7 +121,6 @@ public class DayPane extends StackPane {
     }
 
     private void generateChangesForToday(){
-        System.out.println("IT WAS CALLED CALL ME");
         timeLine = new Line();
         timeLine.setStroke(Color.BLUE);
 

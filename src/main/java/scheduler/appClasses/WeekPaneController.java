@@ -44,6 +44,8 @@ public class WeekPaneController implements Initializable {
 
         TODAYSNUMBER = date.computeNumber();
 
+        DaysHashMap.load();
+
         weekPane = new WeekPane(TODAYSNUMBER);
         weekPane.setUpMonthAndDayLabel(monthAndYearLabel);
         HBox mainHBox = new HBox();
