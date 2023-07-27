@@ -5,7 +5,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 import scheduler.organize.Date;
-import scheduler.organize.Day;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -70,7 +69,7 @@ public class WeekPane extends BorderPane {
 
     public void setUpMonthAndDayLabel(Label label){
         Date todaysDate = new Date(firstDayNumber);
-        label.setText(todaysDate.getMonthName() + ", " + todaysDate.year);
+        label.setText(todaysDate.getMonthName() + " " + todaysDate.year);
 
         mainScrollPane.hvalueProperty().addListener((observable, oldValue, newValue) ->{
             ArrayList <Integer> dayNumbers = new ArrayList<>();
@@ -85,7 +84,7 @@ public class WeekPane extends BorderPane {
             for(int number : dayNumbers){
                 Date date = new Date(number);
                 if(date.getMonthNumberOfDays() - date.day == 4 || date.day == 3){
-                    label.setText(date.getMonthName() + ", " + date.year);
+                    label.setText(date.getMonthName() + " " + date.year);
                 }
             }
         });

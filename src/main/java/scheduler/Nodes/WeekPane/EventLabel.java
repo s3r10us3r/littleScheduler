@@ -23,7 +23,6 @@ public class EventLabel extends Label {
         super();
         this.parent = parent;
         this.event = event;
-        this.height = new SimpleDoubleProperty(event.getDuration() * 2);
         this.width = new SimpleDoubleProperty(200);
         this.setFont(new Font( "Helvetica Bold", 15));
         if(event.getDuration() < 10){
@@ -40,9 +39,11 @@ public class EventLabel extends Label {
         this.setAlignment(Pos.CENTER_LEFT);
         Color textColor = new Color(event.getBackgroundColorValues()[0], event.getBackgroundColorValues()[1], event.getBackgroundColorValues()[2], 1);
         this.setTextFill(textColor);
+        this.setTranslateY(-11);
     }
 
     private void generateLabel(){
+        this.height = new SimpleDoubleProperty(event.getDuration() * 2);
         this.setText(event.getName());
         this.setAlignment(Pos.CENTER);
         this.maxHeightProperty().bind(this.height);

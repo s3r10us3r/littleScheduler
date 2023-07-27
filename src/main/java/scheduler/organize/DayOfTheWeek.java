@@ -1,8 +1,8 @@
 package scheduler.organize;
 
 public enum DayOfTheWeek {
-    MONDAY("Monday", "MON", 1), TUESDAY("Tuesday", "TUE", 2), WEDNESDAY("Wednesday", "WED", 3),
-    THURSDAY("Thursday", "THUR", 4), FRIDAY("Friday", "FRI", 5), SATURDAY("Saturday", "SAT", 6), SUNDAY("Sunday", "SUN", 7);
+    MONDAY("Monday", "MON", 0), TUESDAY("Tuesday", "TUE", 1), WEDNESDAY("Wednesday", "WED", 2),
+    THURSDAY("Thursday", "THUR", 3), FRIDAY("Friday", "FRI", 4), SATURDAY("Saturday", "SAT", 5), SUNDAY("Sunday", "SUN", 6);
 
     public final String longForm;
     public final String shortForm;

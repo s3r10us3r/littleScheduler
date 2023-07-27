@@ -74,7 +74,7 @@ public class Date {
         int number = 0;
         if(year != 2000){
             number += 365 * yearFrom2000;
-            number += yearFrom2000/4 + 1;
+            number += (yearFrom2000-1)/4 + 1;
         }
         number += getDaysPassedThisYear();
         number += day - 1;//this is because first of January 2000 has number '0'
@@ -87,9 +87,11 @@ public class Date {
             result += 31;
         }
         if(month > 2){
-            result += 28;
             if(year % 4 == 0){
-                result += 1;
+                result += 29;
+            }
+            else{
+                result += 28;
             }
         }
         if(month > 3){
@@ -154,5 +156,9 @@ public class Date {
     }
     public String getMonthName(){
         return getMonthName(this.month);
+    }
+
+    public Date copy(){
+        return new Date(this.year, this.month, this.day);
     }
 }

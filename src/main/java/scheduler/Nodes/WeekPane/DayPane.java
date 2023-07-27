@@ -43,7 +43,6 @@ public class DayPane extends StackPane {
     }
 
     private void setUp(boolean isToday){
-        System.out.println("SETTING UP ANOTHER ONE: " + this.getNumber());
         this.setMinSize(250,2880);
         this.setMaxSize(250, 2880);
         generateLines();
@@ -149,7 +148,6 @@ public class DayPane extends StackPane {
     }
 
     public void setUpAsToday(){
-        System.out.println("I was fired on: " + this.number);
         this.getChildren().clear();
         setUp(true);
     }

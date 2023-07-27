@@ -1,11 +1,6 @@
 package scheduler.organize;
 
-import scheduler.appClasses.SchedulerApp;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashMap;
 
 public class DaysHashMap {
@@ -47,7 +42,7 @@ public class DaysHashMap {
             oos.writeObject(days);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } ;
+        }
     }
 
 }

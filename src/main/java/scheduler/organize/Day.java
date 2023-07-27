@@ -2,6 +2,7 @@ package scheduler.organize;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import scheduler.organize.Date;
 
 public class Day implements Serializable {
     protected ArrayList<Event> events;
@@ -14,64 +15,15 @@ public class Day implements Serializable {
     }
 
     public Day(int day, int month, int year){
-        this.number = computeNumber(day, month, year);
+        this.number = new Date(year, month, day).computeNumber();
         events = new ArrayList<>();
         this.dayOfTheWeek = DayOfTheWeek.computeDayOfTheWeek(number);
     }
 
     public static int computeNumber(int day, int month, int year){
-        int yearFrom2000 = year - 2000;
-        int number = 0;
-        if(year != 2000){
-            number += 365 * yearFrom2000;
-            number += yearFrom2000/4 + 1;
-        }
-        number += getDaysPassedThisYear(month, year);
-        number += day - 1;//this is because first of January 2000 has number '0'
-        return number;
+        Date date = new Date(year, month, day);
+        return date.computeNumber();
     }
-
-    private static int getDaysPassedThisYear(int month, int year){
-        int result = 0;
-        if(month > 1){
-            result += 31;
-        }
-        if(month > 2){
-            result += 28;
-            if(year % 4 == 0){
-                result += 1;
-            }
-        }
-        if(month > 3){
-            result += 31;
-        }
-        if(month > 4){
-            result += 30;
-        }
-        if(month > 5){
-            result += 31;
-        }
-        if(month > 6){
-            result += 30;
-        }
-        if(month > 7){
-            result += 31;
-        }
-        if(month > 8){
-            result += 31;
-        }
-        if(month > 9){
-            result += 30;
-        }
-        if(month > 10){
-            result += 31;
-        }
-        if(month > 11){
-            result += 30;
-        }
-        return result;
-    }
-
 
     public boolean addEvent(Event event){
         if(eventCollidesWithOtherEvents(event)){

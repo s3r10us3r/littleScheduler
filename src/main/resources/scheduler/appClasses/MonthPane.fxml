@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane stylesheets="@main.css" xmlns:fx="http//javafx.com/fxml" fx:controller="scheduler.appClasses.MonthPaneController" fx:id="mainBorderPane">
+    <top>
+        <BorderPane styleClass="topBar">
+            <left>
+                <VBox alignment="CENTER">
+                    <Label fx:id="time" styleClass="time" textFill="white" alignment="CENTER"/>
+                </VBox>
+            </left>
+            <center>
+                <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                    <Label fx:id = "monthAndYearLabel" styleClass="monthAndYearLabel" textAlignment="CENTER"/>
+                </VBox>
+            </center>
+
+            <right>
+                <VBox alignment="BASELINE_RIGHT" HBox.hgrow="ALWAYS">
+                    <ImageView fitHeight="30" fitWidth="30" onMouseClicked="#changePane">
+                        <Image url = "@white-menu-icon-png-18.jpg"/>
+                    </ImageView>
+                </VBox>
+            </right>
+        </BorderPane>
+    </top>
+
+    <center>
+        <VBox fx:id = "centralVBox" minHeight="700" maxHeight="700" alignment="CENTER">
+            <HBox minHeight="30" maxHeight="30" minWidth="700" maxWidth="700" alignment="CENTER">
+                <Label styleClass="weekDay" text = "Monday"/>
+                <Label styleClass="weekDay" text = "Tuesday"/>
+                <Label styleClass="weekDay" text = "Wednesday"/>
+                <Label styleClass="weekDay" text = "Thursday"/>
+                <Label styleClass="weekDay" text = "Friday"/>
+                <Label styleClass="weekDay" text = "Saturday"/>
+                <Label styleClass="weekDay" text = "Sunday"/>
+            </HBox>
+        </VBox>
+    </center>
+
+    <left>
+        <VBox alignment="CENTER">
+            <ImageView onMouseClicked="#goLeft">
+                <Image url="@leftarrow.png"/>
+            </ImageView>
+        </VBox>
+    </left>
+
+    <right>
+        <VBox alignment="CENTER">
+            <ImageView onMouseClicked="#goRight">
+                <Image url="@rightarrow.png"/>
+            </ImageView>
+        </VBox>
+    </right>
+</BorderPane>
