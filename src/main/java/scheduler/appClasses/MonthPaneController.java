@@ -42,12 +42,6 @@ public class MonthPaneController implements Initializable {
         monthAndYearLabel.setText(SchedulerApp.focusedDate.getMonthName() + " " + SchedulerApp.focusedDate.year);
     }
 
-
-    @FXML
-    private void changePane(){
-        SchedulerApp.setRoot("WeekPane");
-    }
-
     @FXML
     private void goLeft(){
         if(SchedulerApp.focusedDate.month == 1){

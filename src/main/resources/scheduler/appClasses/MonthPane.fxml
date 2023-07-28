@@ -19,13 +19,6 @@
                 </VBox>
             </center>
 
-            <right>
-                <VBox alignment="BASELINE_RIGHT" HBox.hgrow="ALWAYS">
-                    <ImageView fitHeight="30" fitWidth="30" onMouseClicked="#changePane">
-                        <Image url = "@white-menu-icon-png-18.jpg"/>
-                    </ImageView>
-                </VBox>
-            </right>
         </BorderPane>
     </top>
 
