@@ -17,7 +17,6 @@ public class ResetTime extends Thread{
             try{
                 Thread.sleep(interval);
                 Platform.runLater(()-> {label.setText(CurrentTime.getCurrentTime());});
-                System.out.println("Time check"+ CurrentTime.getCurrentTime());
             }
             catch(InterruptedException e){
                 e.printStackTrace();

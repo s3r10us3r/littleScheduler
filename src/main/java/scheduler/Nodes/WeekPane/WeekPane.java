@@ -5,19 +5,21 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 import scheduler.organize.Date;
-import scheduler.organize.DayOfTheWeek;
+import scheduler.organize.Day;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class WeekPane extends BorderPane {
     private final int firstDayNumber;
     private ScrollPane mainScrollPane;
     private HBox eventHBox;
     private WeekBar weekBar;
-    private final int WIDTH = 100;
+    private HashMap<Integer, DayPane> dayPaneHashMap;
+    public final static int WIDTH = 100;
     public WeekPane(int dayNumber){
         eventHBox = new HBox();
-        firstDayNumber = dayNumber - DayOfTheWeek.computeDayOfTheWeek(dayNumber).number + 1;
+        firstDayNumber = dayNumber;
         prepareMainScrollPane();
         generateDayPanes();
         generateWeekBar();
@@ -25,7 +27,6 @@ public class WeekPane extends BorderPane {
         mainScrollPane.setContent(eventHBox);
         this.setCenter(mainScrollPane);
         this.center();
-        System.out.println("FirstDayNumber: " + firstDayNumber);
     }
 
     private void prepareMainScrollPane(){
@@ -55,8 +56,11 @@ public class WeekPane extends BorderPane {
     }
 
     private void generateDayPanes(){
+        dayPaneHashMap = new HashMap<>();
         for(int i = Math.max(firstDayNumber - WIDTH, 0); i < firstDayNumber + WIDTH + 7; i++){
-            eventHBox.getChildren().add(new DayPane(i));
+            DayPane dayPane = new DayPane(i);
+            dayPaneHashMap.put(dayPane.getNumber(), dayPane);
+            eventHBox.getChildren().add(dayPane);
         }
     }
 
@@ -89,5 +93,17 @@ public class WeekPane extends BorderPane {
 
     public ScrollPane getMainScrollPane() {
         return mainScrollPane;
+    }
+
+    public HashMap<Integer, DayPane> getDayPaneHashMap() {
+        return dayPaneHashMap;
+    }
+
+    public int getFirstDayNumber() {
+        return firstDayNumber;
+    }
+
+    public WeekBar getWeekBar() {
+        return weekBar;
     }
 }

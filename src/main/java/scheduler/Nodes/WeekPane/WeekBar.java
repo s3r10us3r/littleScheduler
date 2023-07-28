@@ -6,10 +6,13 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+
 public class WeekBar extends ScrollPane {
     private int firstDayNumber;
     private HBox weekBarHBox;
     private final int WIDTH;
+    private ArrayList<WeekDayBox> weekDayBoxArrayList;
     public WeekBar(int firstDayNumber, int width){
         this.firstDayNumber = firstDayNumber;
         this.WIDTH = width;
@@ -26,8 +29,12 @@ public class WeekBar extends ScrollPane {
         weekBarHBox.setBackground(background);
         weekBarHBox.setMinHeight(height);
         weekBarHBox.setMaxHeight(height);
+
+        weekDayBoxArrayList = new ArrayList<>();
         for(int i = Math.max(firstDayNumber - WIDTH, 0); i < firstDayNumber + WIDTH + 7; i++){
-            weekBarHBox.getChildren().add(new WeekDayBox(i));
+            WeekDayBox weekDayBox = new WeekDayBox(i);
+            weekDayBoxArrayList.add(weekDayBox);
+            weekBarHBox.getChildren().add(weekDayBox);
         }
 
         this.setContent(weekBarHBox);
@@ -42,5 +49,9 @@ public class WeekBar extends ScrollPane {
         setHbarPolicy(ScrollBarPolicy.NEVER);
         setMinHeight(100);
         setMaxHeight(100);
+    }
+
+    public ArrayList<WeekDayBox> getWeekDayBoxArrayList() {
+        return weekDayBoxArrayList;
     }
 }

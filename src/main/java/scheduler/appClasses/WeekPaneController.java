@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
+import scheduler.Nodes.WeekPane.WeekBar;
 import scheduler.Nodes.WeekPane.WeekPane;
 import scheduler.organize.*;
 import scheduler.time.CurrentTime;
@@ -26,7 +27,9 @@ public class WeekPaneController implements Initializable {
     private VBox topVBox;
     @FXML
     private Label monthAndYearLabel;
-    private WeekPane weekPane;
+    public static WeekPane weekPane;
+    public static WeekBar weekBar;
+    public static int TODAYSNUMBER;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         time.setText(CurrentTime.getCurrentTime());
@@ -39,7 +42,9 @@ public class WeekPaneController implements Initializable {
         LocalDate today = LocalDate.now();
         Date date = new Date(today.getYear(), today.getMonthValue(), today.getDayOfMonth());
 
-        weekPane = new WeekPane(date.computeNumber());
+        TODAYSNUMBER = date.computeNumber();
+
+        weekPane = new WeekPane(TODAYSNUMBER);
         weekPane.setUpMonthAndDayLabel(monthAndYearLabel);
         HBox mainHBox = new HBox();
         mainHBox.getChildren().add(weekPane);

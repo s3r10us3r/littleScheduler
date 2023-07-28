@@ -20,7 +20,6 @@ public class Date {
     }
 
     private void setTheNums(int number){
-        System.out.println(number);
         int year = 2000;
         int month = 1;
         int dayNumber = 1;
@@ -48,9 +47,6 @@ public class Date {
         this.year = year;
         this.month = month;
         this.day = dayNumber;
-        System.out.println(year);
-        System.out.println(month);
-        System.out.println(day);
     }
 
     private int getMonthNumberOfDays(int month, int year){

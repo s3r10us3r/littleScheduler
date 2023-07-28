@@ -79,7 +79,6 @@ public class Day implements Comparable<Day>{
         }
         else{
             events.add(event);
-            System.out.println("Added event");
             return true;
         }
     }
