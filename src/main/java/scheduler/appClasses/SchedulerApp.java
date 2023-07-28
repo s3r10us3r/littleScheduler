@@ -1,7 +1,6 @@
 package scheduler.appClasses;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -22,7 +21,7 @@ public class SchedulerApp extends Application {
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(SchedulerApp.class.getResource("WeekPane.fxml"));
-        this.stage = stage;
+        SchedulerApp.stage = stage;
         scene = new Scene(fxmlLoader.load(), 1920, 1080);
         stage.setTitle("Scheduler");
         stage.setMaximized(true);

@@ -1,6 +1,5 @@
 package scheduler.Nodes.WeekPane;
 
-import javafx.collections.transformation.SortedList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

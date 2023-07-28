@@ -1,7 +1,6 @@
 package scheduler.Nodes.MonthPane;
 
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import scheduler.appClasses.SchedulerApp;
 import scheduler.organize.Date;
 import scheduler.organize.DayOfTheWeek;

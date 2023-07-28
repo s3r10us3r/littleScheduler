@@ -39,10 +39,6 @@ public class Event implements Comparable<Event>, Serializable{
         backgroundColorValues = new double[3]; backgroundColorValues[0] = red; backgroundColorValues[1] = green; backgroundColorValues[2] = blue;
     }
 
-    public boolean isInConflict(Event event){
-        return startTime < event.getFinishTime() && finishTime > event.getStartTime();
-    }
-
     @Override
     public int compareTo(Event o){
         return startTime - o.getStartTime();

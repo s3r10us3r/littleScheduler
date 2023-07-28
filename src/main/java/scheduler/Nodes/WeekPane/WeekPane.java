@@ -90,10 +90,6 @@ public class WeekPane extends BorderPane {
         });
     }
 
-    public ScrollPane getMainScrollPane() {
-        return mainScrollPane;
-    }
-
     public HashMap<Integer, DayPane> getDayPaneHashMap() {
         return dayPaneHashMap;
     }
